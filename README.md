@@ -13,4 +13,4 @@ If one of file contains invalid data, program'll stop running.
 
 # Build and run
 
-You can download JAR archive here: https://yadi.sk/d/Iji896nR5oXgjg
+You can download JAR archive here: https://yadi.sk/d/4z6yZYYyl6yBcQ
