@@ -19,11 +19,11 @@ public class Main {
         } catch (InvalidArgumentsException e) {
             System.err.println(e);
             HelpFormatter formatter = new HelpFormatter();
-            String header = "This program merges few sorted by ascending or descending files with same data type in all of them" +
-                    " into one sorted by same order file.\n" + "First parameter is order in which input files are sorted. Optional," +
+            String header = "\nThis program merges few sorted by ascending or descending files with same data type in all of them" +
+                    " into one sorted by same order file.\n\n" + "First parameter is order in which input files are sorted. Optional," +
                     " default is ascending.\n" + "Second parameter is data type. Required.\n" + "Third is a name of output file. Required.\n" +
-                    "Rest arguments - names of files to sort. At least one name required";
-            formatter.printHelp("Merge sort", header, e.getOptions(), "");
+                    "Rest arguments - names of files to sort. At least one name required\n\n", footer = "";
+            formatter.printHelp("Merge sort", header, e.getOptions(), footer);
             return;
         } catch (ParseException e) {
             e.printStackTrace();
