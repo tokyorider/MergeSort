@@ -24,6 +24,7 @@ public class StreamCopier {
                 to.write(str);
                 to.newLine();
                 prevStr = str;
+            } else {
                 System.err.println("Warning: files are unsorted. Some data will lost");
             }
             str = from.readLine();
