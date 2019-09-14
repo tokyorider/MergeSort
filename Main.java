@@ -17,8 +17,13 @@ public class Main {
         try {
             arguments = ArgResolver.resolveArgs(args);
         } catch (InvalidArgumentsException e) {
-            e.printStackTrace();
+            System.err.println(e);
             HelpFormatter formatter = new HelpFormatter();
+            String header = "This program merges few sorted by ascending or descending files with same data type in all of them" +
+                    " into one sorted by same order file.\n" + "First parameter is order in which input files are sorted. Optional," +
+                    " default is ascending.\n" + "Second parameter is data type. Required.\n" + "Third is a name of output file. Required.\n" +
+                    "Rest arguments - names of files to sort. At least one name required";
+            formatter.printHelp("Merge sort", header, e.getOptions(), "");
             return;
         } catch (ParseException e) {
             e.printStackTrace();
@@ -42,7 +47,7 @@ public class Main {
         }
     }
 
-    private static <T>void mergeAllFiles(Arguments arguments, Comparator<T> comparator, Converter<T> converter) {
+    private static <T> void mergeAllFiles(Arguments arguments, Comparator<T> comparator, Converter<T> converter) {
         ConcurrentLinkedQueue<String> inQueue = arguments.inQueue;
         int i = 1;
         while (inQueue.size() != 1) {
