@@ -17,7 +17,7 @@ public class Main {
         try {
             arguments = ArgResolver.resolveArgs(args);
         } catch (InvalidArgumentsException e) {
-            System.err.println(e);
+            System.err.println(e.getMessage());
             HelpFormatter formatter = new HelpFormatter();
             String header = "\nThis program merges few sorted by ascending or descending files with same data type in all of them" +
                     " into one sorted by same order file.\n\n" + "First parameter is order in which input files are sorted. Optional," +
@@ -26,7 +26,7 @@ public class Main {
             formatter.printHelp("Merge sort", header, e.getOptions(), footer);
             return;
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
             return;
         }
 
@@ -45,6 +45,8 @@ public class Main {
                 mergeAllFiles(arguments, ((str1, str2) -> -1 * str1.compareTo(str2)), (str -> str));
             }
         }
+
+        deleteTmpFiles();
     }
 
     private static <T> void mergeAllFiles(Arguments arguments, Comparator<T> comparator, Converter<T> converter) {
@@ -62,8 +64,13 @@ public class Main {
 
                 inQueue.add("tmp" + i + ".krl2004");
                 ++i;
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (NumberFormatException e) {
+                System.err.println("Error: incorrect data type");
+                return;
+            }
+            catch (IOException e) {
+                System.err.println(e.getMessage());
+                return;
             }
         }
 
@@ -71,15 +78,16 @@ public class Main {
              BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(arguments.out), StandardCharsets.UTF_8)))
         {
             StreamCopier.copyWithSkippingUnsortedData(in, out, comparator, converter);
-        } catch(IOException e) {
-            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.err.println("Error: incorrect data type");
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
 
-        deleteTmpFiles(i);
     }
 
-    private static void deleteTmpFiles(int count) {
-        for (int j = 1; j < count; j++) {
+    private static void deleteTmpFiles() {
+        for (int j = 1; new File("tmp" + j + ".krl2004").exists(); j++) {
             new File("tmp" + j + ".krl2004").delete();
         }
     }

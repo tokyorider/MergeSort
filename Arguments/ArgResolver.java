@@ -33,7 +33,7 @@ public class ArgResolver {
         inPos = outPos + 1;
         requiredLength = inPos + 1;
         if (commandLineArgs.length < requiredLength) {
-            throw new InvalidArgumentsException(options, "");
+            throw new InvalidArgumentsException(options, "Merge sort: error: too few arguments\n");
         }
 
         if (cmd.hasOption("i")) {
@@ -41,7 +41,7 @@ public class ArgResolver {
         } else if (cmd.hasOption("s")) {
             dataType = DataType.STRING;
         } else {
-            throw new InvalidArgumentsException(options, "");
+            throw new InvalidArgumentsException(options, "Merge sort: error: wrong data type\n");
         }
 
         String out = commandLineArgs[outPos];
