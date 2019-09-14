@@ -13,4 +13,8 @@ If one of file contains invalid data, program'll stop running.
 
 # Build and run
 
-You can download JAR archive here: https://yadi.sk/d/4z6yZYYyl6yBcQ
+You can download JAR archive here: https://yadi.sk/d/4z6yZYYyl6yBcQ or build it by yourself.
+
+# Example
+
+java -jar sort.jar -d -i out.txt in.txt
