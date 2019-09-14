@@ -25,15 +25,16 @@ public class Main {
             return;
         }
 
-        String sortOrder = arguments.order, dataType = arguments.dataType;
-        if (dataType.equals("i")) {
-            if (sortOrder.equals("a")) {
+        SortingOrder sortOrder = arguments.order;
+        DataType dataType = arguments.dataType;
+        if (dataType.equals(DataType.INTEGER)) {
+            if (sortOrder.equals(SortingOrder.ASCENDING)) {
                 mergeAllFiles(arguments, Integer::compareTo, Integer::parseInt);
             } else {
                 mergeAllFiles(arguments, ((num1, num2) -> -1 * num1.compareTo(num2)), Integer::parseInt);
             }
         } else {
-            if (sortOrder.equals("a")) {
+            if (sortOrder.equals(SortingOrder.ASCENDING)) {
                 mergeAllFiles(arguments, String::compareTo, (str -> str));
             } else {
                 mergeAllFiles(arguments, ((str1, str2) -> -1 * str1.compareTo(str2)), (str -> str));
@@ -74,9 +75,7 @@ public class Main {
 
     private static void deleteTmpFiles(int count) {
         for (int j = 1; j < count; j++) {
-            if (!new File("tmp" + j + ".krl2004").delete()) {
-                System.err.println("File deletion error");
-            }
+            new File("tmp" + j + ".krl2004").delete();
         }
     }
 

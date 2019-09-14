@@ -4,15 +4,15 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Arguments {
 
-    public String order;
+    public SortingOrder order;
 
-    public String dataType;
+    public DataType dataType;
 
     public ConcurrentLinkedQueue<String> inQueue;
 
     public String out;
 
-    public Arguments(String order, String dataType, String out, ConcurrentLinkedQueue<String> inQueue) {
+    public Arguments(SortingOrder order, DataType dataType, String out, ConcurrentLinkedQueue<String> inQueue) {
         this.order = order;
         this.dataType = dataType;
         this.inQueue = inQueue;

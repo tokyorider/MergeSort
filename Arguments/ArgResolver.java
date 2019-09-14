@@ -17,12 +17,13 @@ public class ArgResolver {
 
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(options, commandLineArgs);
-        String sortOrder = "a", dataType;
+        SortingOrder sortOrder = SortingOrder.ASCENDING;
+        DataType dataType;
         int outPos, inPos, requiredLength;
 
         if (cmd.hasOption("a") || cmd.hasOption("d")) {
             if (cmd.hasOption("d")) {
-                sortOrder = "d";
+                sortOrder = SortingOrder.DESCENDING;
             }
 
             outPos = 2;
@@ -36,9 +37,9 @@ public class ArgResolver {
         }
 
         if (cmd.hasOption("i")) {
-            dataType = "i";
+            dataType = DataType.INTEGER;
         } else if (cmd.hasOption("s")) {
-            dataType = "s";
+            dataType = DataType.STRING;
         } else {
             throw new InvalidArgumentsException(options);
         }
